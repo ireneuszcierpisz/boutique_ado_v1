@@ -81,6 +81,28 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
+# Since by default allauth will send confirmation emails to any new accounts.
+# We need to temporarily log those emails to the console so we can get the confirmation links.
+# To do that we can set:
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# The account authentication method is what tells allauth that we want to allow
+# authentication using either usernames or emails.
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+# an email is required to register for the site.
+ACCOUNT_EMAIL_REQUIRED = True
+# verify an email is mandatory so we know users are using a real email.
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# require to enter email twice on the registration page
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+# set a minimum username length of four characters.
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+# specify a login url and a url to redirect back to after logging in.
+LOGIN_URL = '/accounts/login/'
+# upon logging in will just be redirected to the home page of our store.
+LOGIN_REDIRECT_URL = '/'
+
+
 WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 
 
